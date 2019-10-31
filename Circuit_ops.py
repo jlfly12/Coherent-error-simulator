@@ -110,13 +110,19 @@ def apply(gate, states, global_phase=False):
 # Plot state probabilities for one state vector only
 # ADD COLOUR FOR PHASE?
 
-def state_prob_plot(state, title='State probability plot'):
+def state_prob_plot(state, title='State probability plot', save=False):
     if check_if_cupy_is_imported():
         state = cp.asnumpy(state)
     for i in range(len(state)):
         plt.title(title)
         plt.plot(np.linspace(i, i, 2), np.linspace(
             0, np.absolute(state[i]) ** 2, 2), 'b', linewidth=5)
+    if save:
+        import os.path
+        count = 1
+        while os.path.exists(f'{count}.pdf'):
+            count += 1;
+        plt.savefig(f'{count}.pdf')
     plt.show()
 
 # Calculate, plot, save and read fidelities

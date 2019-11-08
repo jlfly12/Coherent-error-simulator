@@ -20,6 +20,13 @@ def check_if_cupy_is_imported():
     return True if 'cupy' in sys.modules else False
 
 
+# Give basic statistical info about given set of fidelities
+def stat_analysis(results):
+    print(f"Number of data = {len(results)}")
+    print(f"Average fidelity = {sum(results) / len(results)}")
+    print(f"Max fidelity minus Min fidelity = {max(results) - min(results)}")
+    print(f"Variance = {var(results)}")
+    
 # Convert state index to a bit string (useful for extracting specific state amplitudes)
 def int_to_bit_str(integer, N):
     return array(list(binary_repr(integer, width=N)), dtype=int)
